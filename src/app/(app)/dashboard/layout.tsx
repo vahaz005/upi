@@ -2,10 +2,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
-import "./globals.css";
+import  "../../../app/globals.css"
+
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
-import AuthProvider from "@/context/AuthProvider";
+import SideBar from "@/components/SideBar";
 import BankProvider from "@/context/BankProvider";
 
 
@@ -23,24 +24,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
+      <body className={cn('bg-background' , inter.className)}>
         <BankProvider>
-        <body className={cn('bg-background' , inter.className)}>
-        
-        <ThemeProvider attribute="class">
-       
-          {children}
-
-      
+             
+        <div className="w-full h-screen max-h-screen flex">
+          <SideBar/>
+        {children}
+        </div>
+        </BankProvider>
+  
+     
           
       
-        </ThemeProvider>
-        <Toaster/>
+      
+        
+        
         </body>
-        </BankProvider>
-     
-      </AuthProvider>
-     
     </html>
   );
 }
