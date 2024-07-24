@@ -8,10 +8,10 @@ import { use } from "react";
 import { stat } from "fs";
 import { extractCustomerIdFromUrl, formatDateTime, getAbbreviation } from "@/lib/utils";
 import { da } from "date-fns/locale";
-dbConnect()
+
 export async function POST(request:Request) {
     
-
+    await dbConnect()
    try {
      const { fullName,email,password,address,postalCode,ssn,dateOfBirth ,state } = await request.json() ;
      //finding 

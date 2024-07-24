@@ -2,8 +2,10 @@ import { client } from "@/lib/plaid";
 import { AirVent, AwardIcon } from "lucide-react"
 import { CountryCode, Products } from "plaid";
 import User from "@/models/User";
+import dbConnect from "@/lib/dbConnect";
 
 export async  function POST(request:Request) {
+    await dbConnect()
     const { userID } =  await request.json();
      // The user ID should come from your auth system
      const user = await User.findById(userID) ;
