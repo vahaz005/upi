@@ -8,6 +8,7 @@ import { account } from '@/context/BankProvider'
 
 const BankCard = ({ account, userName, showBalance = true }: {account:account ,userName:string , showBalance:boolean }) => {
 
+  
   console.log(account);
   return (
     <div className="flex flex-col">
@@ -15,10 +16,10 @@ const BankCard = ({ account, userName, showBalance = true }: {account:account ,u
         <div className="bank-card_content">
           <div>
             <h1 className="text-16 font-semibold text-white">
-              {account.name}
+              { account && account.name}
             </h1>
             <p className="font-ibm-plex-serif font-black text-white">
-              {account.currentBalance}
+              { account && account.currentBalance}
             </p>
           </div>
 

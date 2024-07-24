@@ -17,6 +17,17 @@ export async function POST(request:Request) {
      //finding 
    
      const statef= getAbbreviation(state)
+     const existingUser = await User.findOne({email:email}) ;
+     if(existingUser){
+         return Response.json({
+             success:false ,
+             message:"User already exist"
+ 
+         } ,
+      {
+         status:400
+      })
+     }
 
      const userData :IuserS = {
         
@@ -50,17 +61,7 @@ export async function POST(request:Request) {
       
       console.log(dwollaCustomerId)
       
-     const existingUser = await User.findOne({email:email}) ;
-     if(existingUser){
-         return Response.json({
-             success:false ,
-             message:"User already exist"
- 
-         } ,
-      {
-         status:400
-      })
-     }
+    
      const VerifyCode = Math.floor(100000 + Math.random() * 900000).toString() ;
      const salt = await bcryptjs.genSalt(10)
      const hashedPassword = await bcryptjs.hash(password, salt)

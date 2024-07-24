@@ -57,7 +57,7 @@ const PlaidLink = ({ userId , type , variant }:PlaidLinkProps) => {
       });
       const finaldata = await response.json();
       console.log(finaldata?.accessToken)
-      router.push(`/dashboard/${userId}`)
+      router.push(`/signin`)
      
     } catch (error) {
       console.error('Error exchanging public token:', error);

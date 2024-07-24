@@ -51,7 +51,9 @@ const SideBar = () => {
                    <div className='flex flex-col w-full gap-3'>
                     {
                       sidebar.map((item)=> 
-                        <Link href={item.Link}>   <div onClick={()=>{
+                        <Link key={item.name
+    
+                        } href={item.Link}>   <div onClick={()=>{
                           serActive(item.name)
                         }} key={item.name} className={cn(` rounded-md p-3 cursor-pointer flex text-foreground text-semibold items-center gap-3 ${active === item.name && 'bg-input'}`)}>
                           <Image src={item.icon} alt='section' width={25} height={25}></Image>
