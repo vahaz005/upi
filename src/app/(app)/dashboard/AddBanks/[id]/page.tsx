@@ -5,6 +5,7 @@ import React from 'react'
 
 const page = () => {
     const params = useParams<{id:string}>()
+    console.log(params.id)
   return (
     <div className='flex w-[82%]  h-screnn max-h-screen justify-center items-center'>
 

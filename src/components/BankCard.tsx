@@ -4,8 +4,9 @@ import Link from 'next/link'
 import React from 'react'
 
 import { AccountBase } from 'plaid'
+import { account } from '@/context/BankProvider'
 
-const BankCard = ({ account, userName, showBalance = true }: {account:AccountBase ,userName:string , showBalance:boolean }) => {
+const BankCard = ({ account, userName, showBalance = true }: {account:account ,userName:string , showBalance:boolean }) => {
 
   console.log(account);
   return (
@@ -17,7 +18,7 @@ const BankCard = ({ account, userName, showBalance = true }: {account:AccountBas
               {account.name}
             </h1>
             <p className="font-ibm-plex-serif font-black text-white">
-              {account.balances.current}
+              {account.currentBalance}
             </p>
           </div>
 

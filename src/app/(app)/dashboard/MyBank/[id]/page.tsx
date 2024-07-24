@@ -8,7 +8,7 @@ import { AccountBase } from 'plaid'
 import BankCard from '@/components/BankCard'
 import { useSession } from 'next-auth/react'
 import { User } from 'next-auth'
-import { BankContext } from '@/context/BankProvider'
+import { account, BankContext } from '@/context/BankProvider'
 export interface Chart {
   number:string , 
   balance:number | null
@@ -24,6 +24,21 @@ const page = () => {
   console.log(paramas)
   const[chartData , setChartData] = useState<Chart[]>([]) ;
   const accountS = useContext(BankContext) ;
+  useEffect(() => {
+    if (accountS.length > 0) {
+      const newData = accountS.map((item:account) => ({
+        number: item.name,
+        balance: item?.currentBalance,
+      }));
+
+      setChartData((prev) => {
+        const existingNumbers = new Set(prev.map((data) => data.number));
+        const filteredData = newData.filter((item) => !existingNumbers.has(item.number));
+        return [...prev, ...filteredData];
+      });
+    }
+    
+  }, [accountS]);
 //   const [accountS , setBankAccount] = useState<AccountBase[]>([]);
 //   useEffect(()=>{
    
@@ -51,29 +66,15 @@ const page = () => {
 
 //     gettingaccount()
 //   } , [])
-  if(!accountS){
+  if(accountS.length === 0){
     return (
       <div className='flex w-[82%] justify-center items-center'>
-        <Loader width={100} height={100}/>
+        <Loader2 width={100} height={100}/>
       </div>
     )
   }  
   console.log(accountS)
-  useEffect(() => {
-    if (accountS.length > 0) {
-      const newData = accountS.map((item: AccountBase) => ({
-        number: item.name,
-        balance: item.balances.current,
-      }));
-
-      setChartData((prev) => {
-        const existingNumbers = new Set(prev.map((data) => data.number));
-        const filteredData = newData.filter((item) => !existingNumbers.has(item.number));
-        return [...prev, ...filteredData];
-      });
-    }
-    
-  }, [accountS]);
+ 
   if(!chartData){
     return (
       <div className='flex w-[82%] justify-center items-center'>
