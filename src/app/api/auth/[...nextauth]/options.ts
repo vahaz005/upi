@@ -4,6 +4,7 @@ import NextAuth, { NextAuthOptions } from "next-auth"
 import bcryptjs from "bcryptjs"
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { use } from "react";
+import { Database } from "lucide-react";
 
 
 // Your own logic for dealing with plaintext password strings; be careful!
@@ -23,6 +24,7 @@ export const authoptions :NextAuthOptions = {
       authorize: async (credentials:any):Promise<any> => {
         console.log("vahaz")
         await dbConnect() ;
+        console.log("connected")
         try {
           console.log(credentials.email, "username while credentials testing")
          const newuser  =    await User.findOne({
